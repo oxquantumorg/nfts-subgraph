@@ -1,6 +1,6 @@
 specVersion: 0.0.4
 description: 721-MarketPlace
-repository: https://github.com/Data-Nexus/nft-sales-v2
+repository: https://github.com/oxquantumorg/nfts-subgraph
 schema:
   file: ./schema.graphql
 dataSources:
