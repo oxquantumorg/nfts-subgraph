@@ -1,13 +1,13 @@
 {
-  "name": "nft-sale",
+  "name": "nfts-subgraph",
   "license": "MIT",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ data-nexus/nft-sale",
-    "create-local": "graph create --node http://localhost:8020/ data-nexus/nft-sale",
-    "remove-local": "graph remove --node http://localhost:8020/ data-nexus/nft-sale",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 data-nexus/nft-sale"
+    "deploy": "graph deploy --node http://172.208.49.221:8020 bigchiano/nfts-subgraph --ipfs http://172.208.49.221:5001 ",
+    "create": "graph create --node http://172.208.49.221:8020 bigchiano/nfts-subgraph",
+    "remove-local": "graph remove --node http://localhost:8020/ bigchiano/nfts-subgraph",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 bigchiano/nfts-subgraph"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.29.0",
