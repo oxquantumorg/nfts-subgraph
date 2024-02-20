@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class Approval extends ethereum.Event {
@@ -405,7 +405,10 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.call(
       "allowance",
       "allowance(address,address):(uint256)",
-      [ethereum.Value.fromAddress(_owner), ethereum.Value.fromAddress(_spender)]
+      [
+        ethereum.Value.fromAddress(_owner),
+        ethereum.Value.fromAddress(_spender),
+      ],
     );
 
     return result[0].toBigInt();
@@ -413,12 +416,15 @@ export class ERC20Abi extends ethereum.SmartContract {
 
   try_allowance(
     _owner: Address,
-    _spender: Address
+    _spender: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "allowance",
       "allowance(address,address):(uint256)",
-      [ethereum.Value.fromAddress(_owner), ethereum.Value.fromAddress(_spender)]
+      [
+        ethereum.Value.fromAddress(_owner),
+        ethereum.Value.fromAddress(_spender),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -430,7 +436,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   allowanceByPartition(
     _partition: Bytes,
     _owner: Address,
-    _spender: Address
+    _spender: Address,
   ): BigInt {
     let result = super.call(
       "allowanceByPartition",
@@ -438,8 +444,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromFixedBytes(_partition),
         ethereum.Value.fromAddress(_owner),
-        ethereum.Value.fromAddress(_spender)
-      ]
+        ethereum.Value.fromAddress(_spender),
+      ],
     );
 
     return result[0].toBigInt();
@@ -448,7 +454,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   try_allowanceByPartition(
     _partition: Bytes,
     _owner: Address,
-    _spender: Address
+    _spender: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "allowanceByPartition",
@@ -456,8 +462,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromFixedBytes(_partition),
         ethereum.Value.fromAddress(_owner),
-        ethereum.Value.fromAddress(_spender)
-      ]
+        ethereum.Value.fromAddress(_spender),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -469,7 +475,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   approve(_spender: Address, _value: BigInt): boolean {
     let result = super.call("approve", "approve(address,uint256):(bool)", [
       ethereum.Value.fromAddress(_spender),
-      ethereum.Value.fromUnsignedBigInt(_value)
+      ethereum.Value.fromUnsignedBigInt(_value),
     ]);
 
     return result[0].toBoolean();
@@ -478,7 +484,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   try_approve(_spender: Address, _value: BigInt): ethereum.CallResult<boolean> {
     let result = super.tryCall("approve", "approve(address,uint256):(bool)", [
       ethereum.Value.fromAddress(_spender),
-      ethereum.Value.fromUnsignedBigInt(_value)
+      ethereum.Value.fromUnsignedBigInt(_value),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -490,7 +496,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   approveByPartition(
     _partition: Bytes,
     _spender: Address,
-    _value: BigInt
+    _value: BigInt,
   ): boolean {
     let result = super.call(
       "approveByPartition",
@@ -498,8 +504,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromFixedBytes(_partition),
         ethereum.Value.fromAddress(_spender),
-        ethereum.Value.fromUnsignedBigInt(_value)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_value),
+      ],
     );
 
     return result[0].toBoolean();
@@ -508,7 +514,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   try_approveByPartition(
     _partition: Bytes,
     _spender: Address,
-    _value: BigInt
+    _value: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "approveByPartition",
@@ -516,8 +522,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromFixedBytes(_partition),
         ethereum.Value.fromAddress(_spender),
-        ethereum.Value.fromUnsignedBigInt(_value)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_value),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -530,7 +536,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.call(
       "authorizedNewOwner",
       "authorizedNewOwner():(address)",
-      []
+      [],
     );
 
     return result[0].toAddress();
@@ -540,7 +546,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.tryCall(
       "authorizedNewOwner",
       "authorizedNewOwner():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -551,7 +557,7 @@ export class ERC20Abi extends ethereum.SmartContract {
 
   balanceOf(_tokenHolder: Address): BigInt {
     let result = super.call("balanceOf", "balanceOf(address):(uint256)", [
-      ethereum.Value.fromAddress(_tokenHolder)
+      ethereum.Value.fromAddress(_tokenHolder),
     ]);
 
     return result[0].toBigInt();
@@ -559,7 +565,7 @@ export class ERC20Abi extends ethereum.SmartContract {
 
   try_balanceOf(_tokenHolder: Address): ethereum.CallResult<BigInt> {
     let result = super.tryCall("balanceOf", "balanceOf(address):(uint256)", [
-      ethereum.Value.fromAddress(_tokenHolder)
+      ethereum.Value.fromAddress(_tokenHolder),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -574,8 +580,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       "balanceOfByPartition(bytes32,address):(uint256)",
       [
         ethereum.Value.fromFixedBytes(_partition),
-        ethereum.Value.fromAddress(_tokenHolder)
-      ]
+        ethereum.Value.fromAddress(_tokenHolder),
+      ],
     );
 
     return result[0].toBigInt();
@@ -583,15 +589,15 @@ export class ERC20Abi extends ethereum.SmartContract {
 
   try_balanceOfByPartition(
     _partition: Bytes,
-    _tokenHolder: Address
+    _tokenHolder: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "balanceOfByPartition",
       "balanceOfByPartition(bytes32,address):(uint256)",
       [
         ethereum.Value.fromFixedBytes(_partition),
-        ethereum.Value.fromAddress(_tokenHolder)
-      ]
+        ethereum.Value.fromAddress(_tokenHolder),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -602,15 +608,15 @@ export class ERC20Abi extends ethereum.SmartContract {
 
   canImplementInterfaceForAddress(
     _interfaceHash: Bytes,
-    param1: Address
+    param1: Address,
   ): Bytes {
     let result = super.call(
       "canImplementInterfaceForAddress",
       "canImplementInterfaceForAddress(bytes32,address):(bytes32)",
       [
         ethereum.Value.fromFixedBytes(_interfaceHash),
-        ethereum.Value.fromAddress(param1)
-      ]
+        ethereum.Value.fromAddress(param1),
+      ],
     );
 
     return result[0].toBytes();
@@ -618,15 +624,15 @@ export class ERC20Abi extends ethereum.SmartContract {
 
   try_canImplementInterfaceForAddress(
     _interfaceHash: Bytes,
-    param1: Address
+    param1: Address,
   ): ethereum.CallResult<Bytes> {
     let result = super.tryCall(
       "canImplementInterfaceForAddress",
       "canImplementInterfaceForAddress(bytes32,address):(bytes32)",
       [
         ethereum.Value.fromFixedBytes(_interfaceHash),
-        ethereum.Value.fromAddress(param1)
-      ]
+        ethereum.Value.fromAddress(param1),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -639,7 +645,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.call(
       "collateralManagers",
       "collateralManagers(uint256):(address)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
 
     return result[0].toAddress();
@@ -649,7 +655,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.tryCall(
       "collateralManagers",
       "collateralManagers(uint256):(address)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -679,8 +685,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       "decreaseAllowance(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(_spender),
-        ethereum.Value.fromUnsignedBigInt(_subtractedValue)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_subtractedValue),
+      ],
     );
 
     return result[0].toBoolean();
@@ -688,15 +694,15 @@ export class ERC20Abi extends ethereum.SmartContract {
 
   try_decreaseAllowance(
     _spender: Address,
-    _subtractedValue: BigInt
+    _subtractedValue: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "decreaseAllowance",
       "decreaseAllowance(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(_spender),
-        ethereum.Value.fromUnsignedBigInt(_subtractedValue)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_subtractedValue),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -708,7 +714,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   decreaseAllowanceByPartition(
     _partition: Bytes,
     _spender: Address,
-    _subtractedValue: BigInt
+    _subtractedValue: BigInt,
   ): boolean {
     let result = super.call(
       "decreaseAllowanceByPartition",
@@ -716,8 +722,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromFixedBytes(_partition),
         ethereum.Value.fromAddress(_spender),
-        ethereum.Value.fromUnsignedBigInt(_subtractedValue)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_subtractedValue),
+      ],
     );
 
     return result[0].toBoolean();
@@ -726,7 +732,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   try_decreaseAllowanceByPartition(
     _partition: Bytes,
     _spender: Address,
-    _subtractedValue: BigInt
+    _subtractedValue: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "decreaseAllowanceByPartition",
@@ -734,8 +740,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromFixedBytes(_partition),
         ethereum.Value.fromAddress(_spender),
-        ethereum.Value.fromUnsignedBigInt(_subtractedValue)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_subtractedValue),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -748,7 +754,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.call(
       "defaultPartition",
       "defaultPartition():(bytes32)",
-      []
+      [],
     );
 
     return result[0].toBytes();
@@ -758,7 +764,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.tryCall(
       "defaultPartition",
       "defaultPartition():(bytes32)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -788,8 +794,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       "increaseAllowance(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(_spender),
-        ethereum.Value.fromUnsignedBigInt(_addedValue)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_addedValue),
+      ],
     );
 
     return result[0].toBoolean();
@@ -797,15 +803,15 @@ export class ERC20Abi extends ethereum.SmartContract {
 
   try_increaseAllowance(
     _spender: Address,
-    _addedValue: BigInt
+    _addedValue: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "increaseAllowance",
       "increaseAllowance(address,uint256):(bool)",
       [
         ethereum.Value.fromAddress(_spender),
-        ethereum.Value.fromUnsignedBigInt(_addedValue)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_addedValue),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -817,7 +823,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   increaseAllowanceByPartition(
     _partition: Bytes,
     _spender: Address,
-    _addedValue: BigInt
+    _addedValue: BigInt,
   ): boolean {
     let result = super.call(
       "increaseAllowanceByPartition",
@@ -825,8 +831,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromFixedBytes(_partition),
         ethereum.Value.fromAddress(_spender),
-        ethereum.Value.fromUnsignedBigInt(_addedValue)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_addedValue),
+      ],
     );
 
     return result[0].toBoolean();
@@ -835,7 +841,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   try_increaseAllowanceByPartition(
     _partition: Bytes,
     _spender: Address,
-    _addedValue: BigInt
+    _addedValue: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "increaseAllowanceByPartition",
@@ -843,8 +849,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromFixedBytes(_partition),
         ethereum.Value.fromAddress(_spender),
-        ethereum.Value.fromUnsignedBigInt(_addedValue)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_addedValue),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -857,19 +863,19 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.call(
       "isCollateralManager",
       "isCollateralManager(address):(bool)",
-      [ethereum.Value.fromAddress(_collateralManager)]
+      [ethereum.Value.fromAddress(_collateralManager)],
     );
 
     return result[0].toBoolean();
   }
 
   try_isCollateralManager(
-    _collateralManager: Address
+    _collateralManager: Address,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "isCollateralManager",
       "isCollateralManager(address):(bool)",
-      [ethereum.Value.fromAddress(_collateralManager)]
+      [ethereum.Value.fromAddress(_collateralManager)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -884,8 +890,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       "isOperator(address,address):(bool)",
       [
         ethereum.Value.fromAddress(_operator),
-        ethereum.Value.fromAddress(_tokenHolder)
-      ]
+        ethereum.Value.fromAddress(_tokenHolder),
+      ],
     );
 
     return result[0].toBoolean();
@@ -893,15 +899,15 @@ export class ERC20Abi extends ethereum.SmartContract {
 
   try_isOperator(
     _operator: Address,
-    _tokenHolder: Address
+    _tokenHolder: Address,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "isOperator",
       "isOperator(address,address):(bool)",
       [
         ethereum.Value.fromAddress(_operator),
-        ethereum.Value.fromAddress(_tokenHolder)
-      ]
+        ethereum.Value.fromAddress(_tokenHolder),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -913,7 +919,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   isOperatorForCollateralManager(
     _partition: Bytes,
     _operator: Address,
-    _collateralManager: Address
+    _collateralManager: Address,
   ): boolean {
     let result = super.call(
       "isOperatorForCollateralManager",
@@ -921,8 +927,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromFixedBytes(_partition),
         ethereum.Value.fromAddress(_operator),
-        ethereum.Value.fromAddress(_collateralManager)
-      ]
+        ethereum.Value.fromAddress(_collateralManager),
+      ],
     );
 
     return result[0].toBoolean();
@@ -931,7 +937,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   try_isOperatorForCollateralManager(
     _partition: Bytes,
     _operator: Address,
-    _collateralManager: Address
+    _collateralManager: Address,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "isOperatorForCollateralManager",
@@ -939,8 +945,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromFixedBytes(_partition),
         ethereum.Value.fromAddress(_operator),
-        ethereum.Value.fromAddress(_collateralManager)
-      ]
+        ethereum.Value.fromAddress(_collateralManager),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -952,7 +958,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   isOperatorForPartition(
     _partition: Bytes,
     _operator: Address,
-    _tokenHolder: Address
+    _tokenHolder: Address,
   ): boolean {
     let result = super.call(
       "isOperatorForPartition",
@@ -960,8 +966,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromFixedBytes(_partition),
         ethereum.Value.fromAddress(_operator),
-        ethereum.Value.fromAddress(_tokenHolder)
-      ]
+        ethereum.Value.fromAddress(_tokenHolder),
+      ],
     );
 
     return result[0].toBoolean();
@@ -970,7 +976,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   try_isOperatorForPartition(
     _partition: Bytes,
     _operator: Address,
-    _tokenHolder: Address
+    _tokenHolder: Address,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "isOperatorForPartition",
@@ -978,8 +984,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromFixedBytes(_partition),
         ethereum.Value.fromAddress(_operator),
-        ethereum.Value.fromAddress(_tokenHolder)
-      ]
+        ethereum.Value.fromAddress(_tokenHolder),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -992,7 +998,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.call(
       "isPartitionStrategy",
       "isPartitionStrategy(bytes4):(bool)",
-      [ethereum.Value.fromFixedBytes(_prefix)]
+      [ethereum.Value.fromFixedBytes(_prefix)],
     );
 
     return result[0].toBoolean();
@@ -1002,7 +1008,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.tryCall(
       "isPartitionStrategy",
       "isPartitionStrategy(bytes4):(bool)",
-      [ethereum.Value.fromFixedBytes(_prefix)]
+      [ethereum.Value.fromFixedBytes(_prefix)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1045,7 +1051,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.call(
       "partitionStrategies",
       "partitionStrategies(uint256):(bytes4)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
 
     return result[0].toBytes();
@@ -1055,7 +1061,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.tryCall(
       "partitionStrategies",
       "partitionStrategies(uint256):(bytes4)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1068,7 +1074,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.call(
       "partitionsOf",
       "partitionsOf(address):(bytes32[])",
-      [ethereum.Value.fromAddress(_tokenHolder)]
+      [ethereum.Value.fromAddress(_tokenHolder)],
     );
 
     return result[0].toBytesArray();
@@ -1078,7 +1084,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.tryCall(
       "partitionsOf",
       "partitionsOf(address):(bytes32[])",
-      [ethereum.Value.fromAddress(_tokenHolder)]
+      [ethereum.Value.fromAddress(_tokenHolder)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1106,7 +1112,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.call(
       "swapTokenGraveyard",
       "swapTokenGraveyard():(address)",
-      []
+      [],
     );
 
     return result[0].toAddress();
@@ -1116,7 +1122,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.tryCall(
       "swapTokenGraveyard",
       "swapTokenGraveyard():(address)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1144,7 +1150,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.call(
       "totalPartitions",
       "totalPartitions():(bytes32[])",
-      []
+      [],
     );
 
     return result[0].toBytesArray();
@@ -1154,7 +1160,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.tryCall(
       "totalPartitions",
       "totalPartitions():(bytes32[])",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1182,7 +1188,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.call(
       "totalSupplyByPartition",
       "totalSupplyByPartition(bytes32):(uint256)",
-      [ethereum.Value.fromFixedBytes(param0)]
+      [ethereum.Value.fromFixedBytes(param0)],
     );
 
     return result[0].toBigInt();
@@ -1192,7 +1198,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     let result = super.tryCall(
       "totalSupplyByPartition",
       "totalSupplyByPartition(bytes32):(uint256)",
-      [ethereum.Value.fromFixedBytes(param0)]
+      [ethereum.Value.fromFixedBytes(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1204,7 +1210,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   transfer(_to: Address, _value: BigInt): boolean {
     let result = super.call("transfer", "transfer(address,uint256):(bool)", [
       ethereum.Value.fromAddress(_to),
-      ethereum.Value.fromUnsignedBigInt(_value)
+      ethereum.Value.fromUnsignedBigInt(_value),
     ]);
 
     return result[0].toBoolean();
@@ -1213,7 +1219,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   try_transfer(_to: Address, _value: BigInt): ethereum.CallResult<boolean> {
     let result = super.tryCall("transfer", "transfer(address,uint256):(bool)", [
       ethereum.Value.fromAddress(_to),
-      ethereum.Value.fromUnsignedBigInt(_value)
+      ethereum.Value.fromUnsignedBigInt(_value),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1228,7 +1234,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     _to: Address,
     _value: BigInt,
     _data: Bytes,
-    _operatorData: Bytes
+    _operatorData: Bytes,
   ): Bytes {
     let result = super.call(
       "transferByPartition",
@@ -1239,8 +1245,8 @@ export class ERC20Abi extends ethereum.SmartContract {
         ethereum.Value.fromAddress(_to),
         ethereum.Value.fromUnsignedBigInt(_value),
         ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_operatorData)
-      ]
+        ethereum.Value.fromBytes(_operatorData),
+      ],
     );
 
     return result[0].toBytes();
@@ -1252,7 +1258,7 @@ export class ERC20Abi extends ethereum.SmartContract {
     _to: Address,
     _value: BigInt,
     _data: Bytes,
-    _operatorData: Bytes
+    _operatorData: Bytes,
   ): ethereum.CallResult<Bytes> {
     let result = super.tryCall(
       "transferByPartition",
@@ -1263,8 +1269,8 @@ export class ERC20Abi extends ethereum.SmartContract {
         ethereum.Value.fromAddress(_to),
         ethereum.Value.fromUnsignedBigInt(_value),
         ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_operatorData)
-      ]
+        ethereum.Value.fromBytes(_operatorData),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1280,8 +1286,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(_from),
         ethereum.Value.fromAddress(_to),
-        ethereum.Value.fromUnsignedBigInt(_value)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_value),
+      ],
     );
 
     return result[0].toBoolean();
@@ -1290,7 +1296,7 @@ export class ERC20Abi extends ethereum.SmartContract {
   try_transferFrom(
     _from: Address,
     _to: Address,
-    _value: BigInt
+    _value: BigInt,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "transferFrom",
@@ -1298,8 +1304,8 @@ export class ERC20Abi extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(_from),
         ethereum.Value.fromAddress(_to),
-        ethereum.Value.fromUnsignedBigInt(_value)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_value),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();

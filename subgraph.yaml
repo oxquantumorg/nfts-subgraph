@@ -1,4 +1,4 @@
-specVersion: 0.0.2
+specVersion: 0.0.4
 description: 721-MarketPlace
 repository: https://github.com/Data-Nexus/nft-sales-v2
 schema:
@@ -31,24 +31,24 @@ dataSources:
           handler: handleTransfer
       file: ./src/eip721/index.ts
    
-   #### WETH Contact ####
-  - kind: ethereum/contract
-    name: WETH
-    network: mainnet
-    source:
-      address: "0xA29D0ee618f33d8eFE9A20557fd0EF63dD050859"
-      abi: ERC20Abi
-      startBlock: 0
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.6
-      language: wasm/assemblyscript
-      entities:
-        - wethTransaction
-      abis:
-        - name: ERC20Abi
-          file: ./abis/ERC20ABI.json
-      eventHandlers:
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-      file: ./src/utils/wethUtil.ts
+   #### WETH Contract ####
+  # - kind: ethereum/contract
+  #   name: WETH
+  #   network: mainnet
+  #   source:
+  #     address: "0xA29D0ee618f33d8eFE9A20557fd0EF63dD050859"
+  #     abi: ERC20Abi
+  #     startBlock: 0
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.6
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - wethTransaction
+  #     abis:
+  #       - name: ERC20Abi
+  #         file: ./abis/ERC20ABI.json
+  #     eventHandlers:
+  #       - event: Transfer(indexed address,indexed address,uint256)
+  #         handler: handleTransfer
+  #     file: ./src/utils/wethUtil.ts
